@@ -8,8 +8,8 @@ struct Node {
 	node_t* next;
 };
 
-
-node_t* create_node(int);
+node_t* create_node();
+node_t* init_node(int);
 
 void insert_node_at_the_start(node_t**, node_t*);
 void insert_node_at_the_end(node_t*, node_t*);
@@ -24,9 +24,9 @@ int get_length_of(node_t*_list);
 void print_list(node_t*);
 
 int main() {
-	node_t* list = create_node(10);
-	insert_node_at_the_end(list, create_node(35));
-	insert_node_at_the_end(list, create_node(15));
+	node_t* list = init_node(10);
+	insert_node_at_the_end(list, init_node(35));
+	insert_node_at_the_end(list, init_node(15));
 	remove_node_at_index(list, 1);
 	print_list(list);
 	
@@ -34,7 +34,7 @@ int main() {
 	return 0;
 }
 
-node_t* create_node(int data) {
+node_t* create_node() {
 	node_t* node = NULL;
 	node = malloc(sizeof(node_t));
 	
@@ -43,9 +43,14 @@ node_t* create_node(int data) {
 		exit(EXIT_FAILURE);
 	}
 	
+	return node;
+}
+
+node_t* init_node(int data) {
+	node_t* node = create_node();
 	node->data = data;
 	node->next = NULL;
-	
+
 	return node;
 }
 
